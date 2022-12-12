@@ -8,4 +8,5 @@ export const {
     JWT_SECRET,
     APP_URL,
     DB_URL,
+    REFRESH_SECRET
 } = process.env;

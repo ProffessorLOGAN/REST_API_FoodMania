@@ -3,7 +3,9 @@ const app = express();
 import cors from 'cors';
 import mongoose from 'mongoose';
 const { APP_PORT, DB_URL } = require('./config');
+import routes from './routes';
 import errorHandler from './middleware/errorHandler';
+import path from 'path';
 
 
 
@@ -19,8 +21,12 @@ db.once('open', () => {
     console.log('database connected successfully... ');
 });
 
+global.appRoot = path.resolve(__dirname);
 app.use(cors());
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use('/api', routes);
+// app.use('/uploads', express.static('uploads'));
 app.get('/', (req, res) => {
     res.send('hello world')
 });
