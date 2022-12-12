@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon  -r esm server.jss",
-    "start": "NODE_ENV=production node -r esm server.js"
+    "start": "node -r esm server.js"
   },
   "repository": {
     "type": "git",
