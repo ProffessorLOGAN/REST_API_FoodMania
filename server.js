@@ -1,10 +1,10 @@
-const express = require('express');
+import express from 'express';
 const app = express();
-import cors from 'cors';
 import mongoose from 'mongoose';
-const { APP_PORT, DB_URL } = require('./config');
+import { APP_PORT, DB_URL } from './config';
 import routes from './routes';
 import errorHandler from './middleware/errorHandler';
+import cors from 'cors';
 import path from 'path';
 
 
@@ -34,6 +34,6 @@ app.get('/', (req, res) => {
 
 app.use(errorHandler);
 const PORT = process.env.PORT || APP_PORT;
-app.listen(3000, () => {
+app.listen(8000, () => {
     console.log(`listening on port ${PORT}`);
 });

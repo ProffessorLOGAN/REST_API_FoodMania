@@ -9,3 +9,4 @@
     [+] send response
 
 //Login a user
+//logout user
