@@ -48,7 +48,7 @@ const loginController = {
         const { error } = refreshSchema.validate(req.body);
 
         if (error) {
-            return next(error);
+            return next(error); 
         }
 
         try {
@@ -56,7 +56,7 @@ const loginController = {
         } catch (err) {
             return next(new Error('Something went wrong in the database'));
         }
-        res.json({ status: 1 });
+        res.json({ message: "logout successfull" });
     }
 
 };

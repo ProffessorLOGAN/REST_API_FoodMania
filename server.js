@@ -1,14 +1,11 @@
 import express from 'express';
-const app = express();
-import mongoose from 'mongoose';
 import { APP_PORT, DB_URL } from './config';
-import routes from './routes';
 import errorHandler from './middleware/errorHandler';
-import cors from 'cors';
+const app = express();
+import routes from './routes';
+import mongoose from 'mongoose';
 import path from 'path';
-
-
-
+import cors from 'cors';
 
 //Database Connection
 mongoose.connect(DB_URL, {
