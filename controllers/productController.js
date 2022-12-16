@@ -59,7 +59,23 @@ const productController = {
             }
             res.status(201).json(document);
         });
-    }
+    },
+    async destroy(req, res, next) {
+        const document = await Product.findOneAndRemove({ _id: req.params.id });
+        if (!document) {
+            return next(new Error('Nothing to delete'));
+        }
+        // image delete
+        const imagePath = document._doc.image;
+        // http://localhost:5000/uploads/1616444052539-425006577.png
+        // approot/http://localhost:5000/uploads/1616444052539-425006577.png
+        fs.unlink(`${appRoot}/${imagePath}`, (err) => {
+            if (err) {
+                return next(CustomErrorHandler.serverError());
+            }
+            return res.json(document);
+        });
+    },
 }
 
 export default productController;
