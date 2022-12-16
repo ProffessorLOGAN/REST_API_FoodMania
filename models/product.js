@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
-import { APP_URL } from '../config';
+import { APP_URL,ON_HEROKU } from '../config';
+
 
 const productSchema = new Schema(
     {

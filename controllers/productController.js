@@ -3,6 +3,7 @@ import path from 'path';
 import CustomErrorHandler from '../services/CustomErrorHandler';
 import fs from 'fs';
 import productSchema from '../validators/productValidator';
+import { Product } from '../models';
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => cb(null, 'uploads/'),

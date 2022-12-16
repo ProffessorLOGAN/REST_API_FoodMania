@@ -8,5 +8,6 @@ export const {
     JWT_SECRET,
     APP_URL,
     DB_URL,
-    REFRESH_SECRET
+    REFRESH_SECRET,
+    ON_HEROKU
 } = process.env;
