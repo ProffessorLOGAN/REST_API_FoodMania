@@ -13,6 +13,7 @@ router.post('/logout',auth,loginController.logout);
 //Products routes
 router.post('/product/store/create', [auth, admin], productController.store);
 router.delete('/product/delete/:id', [auth, admin], productController.destroy);
+router.put('/product/update/:id', [auth, admin], productController.update);
 // router.post('/products/cart-items', productController.getProducts);
 
 export default router;

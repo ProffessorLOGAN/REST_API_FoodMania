@@ -76,6 +76,53 @@ const productController = {
             return res.json(document);
         });
     },
+    update(req, res, next) {
+        handleMultipartData(req, res, async (err) => {
+            if (err) {
+                return next(CustomErrorHandler.serverError(err.message));
+            }
+            let filePath;
+            if (req.file) {
+                filePath = req.file.path;
+            }
+
+            // validation
+            const { error } = productSchema.validate(req.body);
+            if (error) {
+                // Delete the uploaded file
+                if (req.file) {
+                    fs.unlink(`${appRoot}/${filePath}`, (err) => {
+                        if (err) {
+                            return next(
+                                CustomErrorHandler.serverError(err.message)
+                            );
+                        }
+                    });
+                }
+
+                return next(error);
+                // rootfolder/uploads/filename.png
+            }
+
+            const { name, price, size } = req.body;
+            let document;
+            try {
+                document = await Product.findOneAndUpdate(
+                    { _id: req.params.id },
+                    {
+                        name,
+                        price,
+                        size,
+                        ...(req.file && { image: filePath }),
+                    },
+                    { new: true }
+                );
+            } catch (err) {
+                return next(err);
+            }
+            res.status(201).json(document);
+        });
+    },
 }
 
 export default productController;
