@@ -123,6 +123,28 @@ const productController = {
             res.status(201).json(document);
         });
     },
+    async getProducts(req, res, next) {
+        let documents;
+        try {
+            documents = await Product.find({
+                _id: { $in: req.body.ids },
+            }).select('-updatedAt -__v');
+        } catch (err) {
+            return next(CustomErrorHandler.serverError());
+        }
+        return res.json(documents);
+    },
+    async show(req, res, next) {
+        let document;
+        try {
+            document = await Product.findOne({ _id: req.params.id }).select(
+                '-updatedAt -__v'
+            );
+        } catch (err) {
+            return next(CustomErrorHandler.serverError());
+        }
+        return res.json(document);
+    },
 }
 
 export default productController;
